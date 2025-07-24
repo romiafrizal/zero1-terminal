@@ -1,0 +1,24 @@
+services:
+  zero1:
+    container_name: terminal-ubuntu
+    hostname: zero1
+    command: ["zsh"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    working_dir: /home/zero1
+    volumes:
+      - ./data:/home/zero1/data
+    ports:
+      - "80:80"
+      - "3306:3306"
+      - "3001:3001"
+
+    networks:
+      - terminal-bridge-network
+
+networks:
+  terminal-bridge-network:
+    driver: bridge
